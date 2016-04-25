@@ -3,11 +3,11 @@ var {
   Image,
   Text,
   View,
-} = React;
+  } = React;
 var SimpleMarkdown = require('simple-markdown');
 var _ = require('lodash');
 
-module.exports = function(styles) {
+module.exports = function(styles, onPressUrl) {
   return {
     autolink: {
       react: function(node, output, state) {
@@ -98,10 +98,12 @@ module.exports = function(styles) {
     link: {
       react: function(node, output, state) {
         state.withinText = true;
+        var onPress = onPressUrl ? function() {onPressUrl(node.target)} : null;
         return React.createElement(Text, {
-          key: state.key,
-          style: styles.autolink
-        }, output(node.content, state));
+            key: state.key,
+            style: styles.autolink,
+            onPress: onPress
+      }, output(node.content, state));
       }
     },
     list: {

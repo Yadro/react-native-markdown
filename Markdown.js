@@ -1,7 +1,7 @@
 var React = require('react-native');
 var {
   View
-} = React;
+  } = React;
 var _ = require('lodash');
 var SimpleMarkdown = require('simple-markdown');
 
@@ -120,13 +120,14 @@ var Markdown = React.createClass({
 
   getDefaultProps: function() {
     return {
-      style: styles
+      style: styles,
+      onPressUrl: null
     };
   },
 
   componentWillMount: function() {
     var mergedStyles = _.merge({}, styles, this.props.style);
-    var rules = require('./rules')(mergedStyles);
+    var rules = require('./rules')(mergedStyles, this.props.onPressUrl);
     rules = _.merge({}, SimpleMarkdown.defaultRules, rules);
 
     var parser = SimpleMarkdown.parserFor(rules);
