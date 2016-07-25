@@ -8,7 +8,7 @@ A component for rendering Markdown in React Native. Pull requests welcome.
 
 ## Getting started
 
-1. `npm install react-native-markdown --save`
+- `npm i git://github.com/yadro/react-native-markdown.git -S`
 
 ## Usage
 
