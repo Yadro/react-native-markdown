@@ -1,8 +1,8 @@
-var React = require('react-native');
-var {
+import React from 'react';
+import {
   View
-  } = React;
-var _ = require('lodash');
+} from 'react-native';
+import {isArray, merge} from 'lodash';
 var SimpleMarkdown = require('simple-markdown');
 
 var styles = {
@@ -126,9 +126,9 @@ var Markdown = React.createClass({
   },
 
   componentWillMount: function() {
-    var mergedStyles = _.merge({}, styles, this.props.style);
+    var mergedStyles = merge({}, styles, this.props.style);
     var rules = require('./rules')(mergedStyles, this.props.onPressUrl);
-    rules = _.merge({}, SimpleMarkdown.defaultRules, rules);
+    rules = merge({}, SimpleMarkdown.defaultRules, rules);
 
     var parser = SimpleMarkdown.parserFor(rules);
     this.parse = function(source) {
@@ -140,7 +140,7 @@ var Markdown = React.createClass({
 
   render: function() {
 
-    var child = _.isArray(this.props.children)
+    var child = isArray(this.props.children)
       ? this.props.children.join('') : this.props.children;
     var tree = this.parse(child);
     return <View style={[styles.view, this.props.style.view]}>{this.renderer(tree)}</View>;
